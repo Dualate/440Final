@@ -6,17 +6,28 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    public Transform[] positions;
-    NavMeshAgent agent;
-    int positionIndex = 0;
-
-    public int max_hp = 3;
+    public int max_hp;
     int current_hp;
-    // Start is called before the first frame update
-    void Start()
+
+    public Transform player;
+    public float attackRange = 10f;
+    NavMeshAgent agent;
+    Animator animator;
+    bool attacking = false;
+
+    [SerializeField] EnemyHealthBar healthBar;
+
+    private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         current_hp = max_hp;
+        //find health bar
+        healthBar = GetComponentInChildren<EnemyHealthBar>(); 
+        //update health
+        healthBar.updateHealthBar(current_hp, max_hp);
+
+        player = GameObject.Find("Player").GetComponent<Transform>();
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,25 +37,33 @@ public class EnemyBehavior : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-       /** agent.destination = positions[positionIndex].position;
-        if (Vector3.Distance(transform.position, agent.destination) < 3f)
-         {
-             if (positionIndex == positions.Length - 1)
-             {
-                 positionIndex = 0;
-             }
-             else
-             {
-                 positionIndex += 1;
-             }
 
-         }
-       */
+        //if the player isn't in attack range
+        if (Vector3.Distance(transform.position, player.position) > attackRange)
+        {
+            //set player position as destination
+            agent.destination = player.position;
+            //start walking animation
+            animator.SetBool("Moving", true);
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+            agent.destination = transform.position;
+            if (!attacking)
+                InvokeRepeating("Attack", 0, 1f);
+        }
     }
 
-    
+    void Attack()
+    {
+        attacking = true;
+        animator.SetTrigger("Trigger");
+    }
+
     public void TakeDamage()
     {
         current_hp -= 1;
+        healthBar.updateHealthBar(current_hp, max_hp);
     }
 }

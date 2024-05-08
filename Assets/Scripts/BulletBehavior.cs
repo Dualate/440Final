@@ -8,7 +8,8 @@ public class BulletBehavior : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * 100f;
+        rb.useGravity = false;
+        rb.AddForce(transform.forward * 100, ForceMode.Impulse);
         Destroy(this.gameObject, 3);
     }
 
@@ -16,7 +17,7 @@ public class BulletBehavior : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            collision.collider.GetComponent<KnightBehavior>().TakeDamage();
+            collision.collider.GetComponent<EnemyBehavior>().TakeDamage();
         }
     }
 
