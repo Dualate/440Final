@@ -9,8 +9,8 @@ public class SpawnManager : MonoBehaviour
 
 
     //enemy spawn random location
-    private float spawnRangeX = 40;
-    private float spawnPosZ = 40;
+    private float spawnRangeX = 15;
+    private float spawnPosZ = 15;
     private float startDelayEnemy = 1;
     public float spawnInterval = 1.5f;
 
@@ -31,6 +31,15 @@ public class SpawnManager : MonoBehaviour
         Instantiate(enemyPrefab[enemyIndex], spawnPos, enemyPrefab[enemyIndex].transform.rotation);
     }
 
-    
+    public void EndGame()
+    {
+        CancelInvoke();
+    }
+
+
+    public void Reset()
+    {
+        Start();
+    }
 
 }

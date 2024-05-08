@@ -41,4 +41,13 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage() {
         health -= 1;
     }
+
+    
+
+
+    public void Reset()
+    {
+        health = numOfHearts;
+    }
+
 }

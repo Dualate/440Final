@@ -6,12 +6,11 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    int player_score;
-    public TextMeshProUGUI scoreText;
+    public int player_score;
 
     private void Update()
     {
-        scoreText.text = "Score: " + player_score;
+
     }
 
     // Update is called once per frame

@@ -19,12 +19,12 @@ public class EnemyBehavior : MonoBehaviour
 
     [SerializeField] EnemyHealthBar healthBar;
 
-    ScoreManager manager;
+    GameManager manager;
 
     private void Start()
     {
         //initialize score manager object
-        manager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         current_hp = max_hp;
         //find health bar
