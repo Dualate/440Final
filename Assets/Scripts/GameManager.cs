@@ -16,12 +16,16 @@ public class GameManager : MonoBehaviour
     bool gameActive = false;
     public TextMeshProUGUI scoreText;
 
+    public AudioClip bgMusic;
+    public AudioClip pickupSound;
+    AudioSource source;
 
     void Start()
     {
         gameActive = true;
         endScreen.gameObject.SetActive(false);
-
+        source = GetComponent<AudioSource>();
+        source.PlayOneShot(bgMusic);
         player = GameObject.Find("Player").GetComponent<PlayerHealth>();
         spawner = GameObject.Find("Spawner").GetComponent<SpawnManager>();
     }
@@ -41,13 +45,16 @@ public class GameManager : MonoBehaviour
         player_score += score;
     }
 
-
+    public void Pickup()
+    {
+        source.PlayOneShot(pickupSound);
+    }
 
     void EndRound()
     {
         spawner.EndGame();
         endScreen.gameObject.SetActive(true);
-        scoreText.text = "Game Over!\nScore: " + "\nPlay Again?";
+        scoreText.text = "Game Over!\nScore: " + player_score + "\nPlay Again?";
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
@@ -57,12 +64,13 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        EditorApplication.ExitPlaymode();
+        Application.Quit();
     }
 
 
     public void ResetRound()
     {
+        player_score = 0;
         endScreen.gameObject.SetActive(false);
         gameActive = true;
         player.Reset();

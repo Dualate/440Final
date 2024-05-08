@@ -6,6 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Pistol : MonoBehaviour
 {
     public GameObject BulletPrefab;
+    public AudioClip gunshot;
+    public AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,7 @@ public class Pistol : MonoBehaviour
     public void Shoot()
     {
         Instantiate(BulletPrefab, transform.position, transform.rotation);
+        source.PlayOneShot(gunshot);
     }
 
     // Update is called once per frame

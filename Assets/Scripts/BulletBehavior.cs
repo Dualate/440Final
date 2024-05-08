@@ -19,6 +19,13 @@ public class BulletBehavior : MonoBehaviour
         {
             collision.collider.GetComponent<EnemyBehavior>().TakeDamage();
         }
+
+        /**if (collision.collider.CompareTag("Health"))
+        {
+            GameObject.Find("Player").GetComponent<PlayerHealth>().GainHealth();
+            Destroy(collision.collider.gameObject);
+        }
+        */
     }
 
 }
