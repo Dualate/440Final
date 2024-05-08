@@ -32,10 +32,9 @@ public class PlayerHealth : MonoBehaviour
                 heartImages[i].enabled = false;
         }
 
-        if(health == 0)
+        if(health < 1)
         {
-            //game over
-            Debug.Log("The player has died.");
+            
         } 
     }
 

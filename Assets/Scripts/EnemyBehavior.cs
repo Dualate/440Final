@@ -15,10 +15,17 @@ public class EnemyBehavior : MonoBehaviour
     Animator animator;
     bool attacking = false;
 
+    public int score_value;
+
     [SerializeField] EnemyHealthBar healthBar;
+
+    ScoreManager manager;
 
     private void Start()
     {
+        //initialize score manager object
+        manager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+
         current_hp = max_hp;
         //find health bar
         healthBar = GetComponentInChildren<EnemyHealthBar>(); 
@@ -35,7 +42,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (current_hp < 1)
         {
-            Destroy(this.gameObject);
+            Die();
         }
 
         //if the player isn't in attack range
@@ -59,6 +66,14 @@ public class EnemyBehavior : MonoBehaviour
     {
         attacking = true;
         animator.SetTrigger("Trigger");
+        player.gameObject.GetComponent<PlayerHealth>().TakeDamage();
+    }
+
+
+    void Die()
+    {
+        manager.UpdateScore(score_value);
+        Destroy(this.gameObject);
     }
 
     public void TakeDamage()

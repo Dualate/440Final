@@ -6,20 +6,18 @@ public class SpawnManager : MonoBehaviour
 {
 
     public GameObject[] enemyPrefab;
-    public GameObject[] coinPrefab;
+
 
     //enemy spawn random location
     private float spawnRangeX = 40;
     private float spawnPosZ = 40;
     private float startDelayEnemy = 1;
-    private float startDelayCoin = 2;
     public float spawnInterval = 1.5f;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SpawnEnemy", startDelayEnemy, spawnInterval);
-        //InvokeRepeating("SpawnCoins", startDelayCoin, spawnInterval);
     }
 
     
@@ -33,13 +31,6 @@ public class SpawnManager : MonoBehaviour
         Instantiate(enemyPrefab[enemyIndex], spawnPos, enemyPrefab[enemyIndex].transform.rotation);
     }
 
-    void SpawnCoins()
-    {
-        //Randomly generate enemy index and spawn position
-        int coinIndex = Random.Range(0, coinPrefab.Length);
-        Vector3 randomSpawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.2455f, Random.Range(-spawnPosZ, spawnPosZ));
-
-        Instantiate(coinPrefab[coinIndex], randomSpawnPos, coinPrefab[coinIndex].transform.rotation);
-    }
+    
 
 }

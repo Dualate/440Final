@@ -9,8 +9,8 @@ public class BulletBehavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        rb.AddForce(transform.forward * 100, ForceMode.Impulse);
-        Destroy(this.gameObject, 3);
+        rb.AddForce(transform.forward * 300, ForceMode.Impulse);
+        Destroy(this.gameObject, 1);
     }
 
     private void OnCollisionEnter(Collision collision)

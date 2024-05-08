@@ -410,6 +410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mage
       objectReference: {fileID: 0}
+    - target: {fileID: 100102, guid: 7c72ed3f90575084c9f3b5b585887182, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 400102, guid: 7c72ed3f90575084c9f3b5b585887182, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -501,6 +505,7 @@ MonoBehaviour:
   max_hp: 2
   player: {fileID: 0}
   attackRange: 10
+  score_value: 40
   healthBar: {fileID: 7353968539477420160}
 --- !u!195 &7285687718909282077
 NavMeshAgent:
